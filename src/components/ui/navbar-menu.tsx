@@ -1,9 +1,7 @@
-"use client";
 import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { div } from "framer-motion/client";
 
 const transition = {
   type: "spring",
@@ -25,9 +23,8 @@ export const MenuItem = ({
   item: string;
   children?: React.ReactNode;
 }) => {
+  if (!item) return null;
 
-  if(!item) return null
-  
   return (
     <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
@@ -42,7 +39,7 @@ export const MenuItem = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={transition}
         >
-          {active === item && children &&  (
+          {active === item && children && (
             <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
               <motion.div
                 transition={transition}
@@ -72,9 +69,6 @@ export const Menu = ({
   children: React.ReactNode;
 }) => {
   return (
-    
-    /* <img src="/hamburger.svg" alt="company logos here" /> */
-
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
       className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 w-[100vw] max-w-[1000px] mx-auto"
@@ -116,12 +110,20 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+// Correcting the type of `rest` in `HoveredLink`
+export const HoveredLink = ({
+  children,
+  ...rest
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  if (!children) return null;
 
-  if(!children) return null
+  // Ensure href is a valid string
+  if (rest.href === undefined) {
+    throw new Error("The href prop cannot be undefined.");
+  }
 
   return (
-    <Link
+    <Link href={rest.href}
       {...rest}
       className="text-neutral-700 dark:text-neutral-200 hover:text-black "
     >

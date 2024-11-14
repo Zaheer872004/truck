@@ -2,12 +2,11 @@
 import Link from "next/link";
 import productData from "../data/productData.json"
 import { BackgroundGradient } from "./ui/background-gradient"; 
-import { div } from "framer-motion/client";
 
 
 
 
-const username : string = 'zaheer'
+// const username : string = 'zaheer'
 
 interface Product {
       "id": number,
