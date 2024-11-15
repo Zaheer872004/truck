@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const transition = {
   type: "spring",
@@ -23,8 +25,6 @@ export const MenuItem = ({
   item: string;
   children?: React.ReactNode;
 }) => {
-  if (!item) return null;
-
   return (
     <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
@@ -71,7 +71,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 w-[100vw] max-w-[1000px] mx-auto"
+      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
     >
       {children}
     </nav>
@@ -110,22 +110,11 @@ export const ProductItem = ({
   );
 };
 
-// Correcting the type of `rest` in `HoveredLink`
-export const HoveredLink = ({
-  children,
-  ...rest
-}: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
-  if (!children) return null;
-
-  // Ensure href is a valid string
-  if (rest.href === undefined) {
-    throw new Error("The href prop cannot be undefined.");
-  }
-
+export const HoveredLink = ({ children, className, ...rest }: React.ComponentProps<'a'>) => {
   return (
-    <Link href={rest.href}
+    <Link href={''}
       {...rest}
-      className="text-neutral-700 dark:text-neutral-200 hover:text-black "
+      className={cn('text-neutral-700 dark:text-neutral-200 hover:text-black', className)}
     >
       {children}
     </Link>

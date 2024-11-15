@@ -1,5 +1,7 @@
-import HeroSection from "@/components/HeroSection";
+import { CarousalProduct } from "@/components/CarousalProduct";
+// import HeroSection from "@/components/HeroSection";
 import { ImagesSliderDemo } from "@/components/ImageSlider";
+import { BentoGridDemo } from "@/components/ProductCard";
 import ProductFeatures from "@/components/ProductFeatures";
 import TestomonialCard from "@/components/TestomonialCard";
 
@@ -8,10 +10,12 @@ export default function Home() {
     
     <div className="dark">
         
-        <HeroSection />
         <ImagesSliderDemo />
-          {/* // here Image of the trucks means banner of the trucks transport */}
+        {/* <HeroSection /> */}
+        <CarousalProduct />
+        <BentoGridDemo />
         <ProductFeatures />
+          {/* // here Image of the trucks means banner of the trucks transport */}
         <TestomonialCard />
         
     </div>

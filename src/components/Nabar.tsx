@@ -1,46 +1,43 @@
-
-
 "use client";
-import React, { useState } from "react";
-import { Menu, MenuItem } from "./ui/navbar-menu";
+import React, { useState, useCallback } from "react";
+import { HoveredLink, Menu, MenuItem } from "./ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-
-
 export default function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
+
+  // Memoized version of setActive to prevent unnecessary re-renders
+  const handleSetActive = useCallback((item: string | null) => {
+    setActive(item);
+  }, []);
+
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 flex max-w-2xl mx-auto z-50", className)}
+      className={cn("fixed top-10 flex items-end justify-center inset-x-0  max-w-2xl mx-auto z-50", className)}
     >
-      <Menu setActive={setActive}>
+      <Menu setActive={handleSetActive}>
         <Link href="/">
-        <MenuItem setActive={setActive} active={active} item="About">
-          {/* <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/web-dev">Web Development</HoveredLink>
-            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-            <HoveredLink href="/branding">Branding</HoveredLink>
-          </div> */}
-        </MenuItem>
+          <MenuItem setActive={handleSetActive} active={active} item="Home">
+            {/* Additional links can be added here */}
+          </MenuItem>
         </Link>
-        <Link href="/service">
-        <MenuItem setActive={setActive} active={active} item="Service">
-          {/* <div className="  text-sm grid grid-cols-2 gap-10 p-4">
-            
-          </div> */}
-        </MenuItem>
+
+        <Link href="/about">
+          <MenuItem setActive={handleSetActive} active={active} item="About">
+            {/* Additional content for About */}
+          </MenuItem>
         </Link>
-        <Link href="/blog">
-        <MenuItem setActive={setActive} active={active} item="Blogs">
-          {/* <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/hobby">Hobby</HoveredLink>
-            <HoveredLink href="/individual">Individual</HoveredLink>
-            <HoveredLink href="/team">Team</HoveredLink>
-            <HoveredLink href="/enterprise">Enterprise</HoveredLink>
-          </div> */}
-        </MenuItem>
+
+        <Link href="/product">
+          <MenuItem setActive={handleSetActive} active={active} item="Product">
+            <div className="flex flex-col space-y-4 text-sm">
+              <HoveredLink href="/Compression Fittings">Compression Fittings</HoveredLink>
+              <HoveredLink href="/Pipe Fittings">Pipe Fittings</HoveredLink>
+              <HoveredLink href="/Valves">Valves</HoveredLink>
+              <HoveredLink href="/Forgings">Forgings</HoveredLink>
+            </div>
+          </MenuItem>
         </Link>
       </Menu>
     </div>
