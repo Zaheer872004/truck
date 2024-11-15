@@ -1,4 +1,5 @@
 import { CarousalProduct } from "@/components/CarousalProduct";
+import Footer from "@/components/Footer";
 // import HeroSection from "@/components/HeroSection";
 import { ImagesSliderDemo } from "@/components/ImageSlider";
 import { BentoGridDemo } from "@/components/ProductCard";
@@ -17,6 +18,7 @@ export default function Home() {
         <ProductFeatures />
           {/* // here Image of the trucks means banner of the trucks transport */}
         <TestomonialCard />
+        <Footer />
         
     </div>
   );
